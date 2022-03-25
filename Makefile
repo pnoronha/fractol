@@ -6,7 +6,7 @@
 #    By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 21:12:28 by pnoronha          #+#    #+#              #
-#    Updated: 2022/03/14 22:30:05 by pnoronha         ###   ########.fr        #
+#    Updated: 2022/03/23 21:03:41 by pnoronha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,24 +16,22 @@ CC			=	gcc
 CFLAGS		=	-O3 -Wall -Wextra -Werror
 LINKS		=	-lmlx -lm -Llibft -lft -framework OpenGL -framework AppKit
 INC			=	-Iincludes -Ilibft -Imac
-
-SRC_PATH	=	sources
-OBJ_PATH	=	objects
-SRC			=	$(SRC_PATH)/fractol.c
-
-OBJ			:=	$(patsubst $(SRC_PATH)/%.c, $(OBJ_PATH)/%.o, $(SRC))
 RM			=	rm -f
 
-all:			$(NAME)
+SRC			=	fractol.c	\
+				pixel.c		\
+				render.c
 
-$(NAME):	$(OBJ) | obj_dir norm libft
-				@$(CC) $(CFLAGS) $< $(LINKS) -o $@
+OBJ			:=	$(SRC:%.c=%.o)
 
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
+all:		$(NAME)
+				@./$(NAME)
+
+$(NAME):	$(OBJ) | libft
+				@$(CC) $(CFLAGS) $^ $(LINKS) -o $@
+
+%.o: %.c
 				@$(CC) $(CFLAGS) $(INC) -c $^ -o $@
-
-obj_dir:
-				@mkdir $(OBJ_PATH)
 
 norm:
 				@norminette -R CheckForbiddenSourceHeader $(SRC)
@@ -49,7 +47,6 @@ libft:
 clean:
 				@$(MAKE) clean -C libft
 				@$(RM) $(OBJ)
-				@$(RM) -d $(OBJ_PATH)
 
 fclean:		clean
 				@$(MAKE) fclean -C libft
