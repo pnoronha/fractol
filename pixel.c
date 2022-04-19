@@ -6,37 +6,41 @@
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 23:16:19 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/03/25 15:16:49 by pnoronha         ###   ########.fr       */
+/*   Updated: 2022/04/20 00:04:37 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_pixel_put(t_image *data, int x, int y, int color)
 {
 	char	*dst;
 
+	if (!data)
+		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bpp / 8));
 	*(unsigned int *)dst = color;
 }
 
 void	gen_pixel(void)
 {
-	int				x;
-	int				y;
+	int	x;
+	int	y;
 
 	x = -1;
 	y = -1;
-	while (++y < base()->height)
+	while (++y < base()->mlxv.height)
 	{
 		x = -1;
-		while (++x < base()->width)
-			my_mlx_pixel_put(&base()->data, x, y, render_color(x, y));
+		while (++x < base()->mlxv.width){
+			my_pixel_put(&base()->img, x, y,
+				base()->fractol_type(pixel_to_complex(x, y, &base()->view)));
+		}
 	}
 }
 
-int	print_pixel(t_vars	*b)
+int	print_pixel(t_structs *b)
 {
-	mlx_put_image_to_window(b->mlx, b->win, b->data.img, 0, 0);
+	mlx_put_image_to_window(b->mlxv.mlx, b->mlxv.win, b->img.img, 0, 0);
 	return (false);
 }

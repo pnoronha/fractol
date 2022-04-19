@@ -6,46 +6,65 @@
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 03:46:31 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/03/25 15:20:53 by pnoronha         ###   ########.fr       */
+/*   Updated: 2022/04/19 23:49:36 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-float map(int in, int inMin, int inMax, int outMin, int outMax)
+double	map(double in, double inMin, double inMax, double outMin, double outMax)
 {
-	float mapped;
-
-	mapped = ((float)((in - inMin)*(outMax - outMin))/
-		(float)(inMax - inMin)) + outMin;
-	return (mapped);
+	return ((((in - inMin)/(inMax - inMin)*(outMax - outMin))) + outMin);
 }
 
-int	render_color(int px, int py)
+void	reset_viewer(t_view *view)
 {
-	float	tempa, tempb, a, b, ca, cb;
-	int		count, maxiter;
+	view->max_X = 2.0;
+	view->min_X = -2.0;
+	view->max_Y = 2.0;
+	view->min_Y = -2.0;
+	view->moveX = -0.5;
+	view->moveY = 0;
+	view->maxiter = 30;
+	view->zoom = 10;
+	// base()->is_print = 0;
+}
 
-	a = map(px, 0, base()->width, -4, 3);
-	b = map(py, 0, base()->height, -2, 2);
-	ca = a;
-	cb = b;
+t_complex	pixel_to_complex(int px, int py, t_view *vi)
+{
+	t_complex	z;
+
+	z.newIm = 0;
+	z.newRe = 0;
+	z.oldIm = 0;
+	z.oldRe = 0;
+	z.real = 1.5 * (px - WIDTH / 2) / ((0.025) * vi->zoom * WIDTH) + vi->moveX;
+	z.imag = (py - HEIGHT / 2) / ((0.025) * vi->zoom * HEIGHT) + vi->moveY;
+	return (z);
+}
+int	mandelbrot(t_complex z)
+{
+	unsigned int color;
+	int count;
+
 	count = -1;
-	maxiter = 50;
-	while (++count < maxiter)
+	while (++count < base()->view.maxiter)
 	{
-		tempa = pow(a, 2) - pow(b, 2);
-		tempb = 2 * a * b;
-		a = tempa + ca;
-		b = tempb + cb;
-		if (a + b > 50)
-			break ;
+		z.oldRe = z.newRe;
+		z.oldIm = z.newIm;
+		z.newRe = z.oldRe * z.oldRe - z.oldIm * z.oldIm + z.real;
+		z.newIm = 2 * z.oldRe * z.oldIm + z.imag;
+		if((z.newRe * z.newRe + z.newIm * z.newIm) > 4)
+			break;
 	}
-	if (count == maxiter)
-		return (0x00000000);
+	if (count == base()->view.maxiter)
+		return (0);
 	else
 	{
-		count = map(count, 0, maxiter, 0, 255);
-		return ((0x00000000 & 0x0000FF00) + (count * 5));
+		color = (unsigned int)map(count, 0,
+			(base()->view.maxiter - 1), 0, 255);
+		base()->colors.blue = 0x55 + (color);
+		return (create_trgb(0, base()->colors.red, color, color));
+		// return (create_trgb(0, base()->colors.red, 0, 0));
 	}
 }

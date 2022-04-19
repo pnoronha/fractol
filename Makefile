@@ -6,7 +6,7 @@
 #    By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 21:12:28 by pnoronha          #+#    #+#              #
-#    Updated: 2022/03/23 21:03:41 by pnoronha         ###   ########.fr        #
+#    Updated: 2022/04/14 20:49:44 by pnoronha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,17 +15,19 @@ NAME		=	fractol
 CC			=	gcc
 CFLAGS		=	-O3 -Wall -Wextra -Werror
 LINKS		=	-lmlx -lm -Llibft -lft -framework OpenGL -framework AppKit
-INC			=	-Iincludes -Ilibft -Imac
+INC			=	-Iincludes -Ilibft/includes -Imac
 RM			=	rm -f
 
-SRC			=	fractol.c	\
+SRC			=	main.c		\
 				pixel.c		\
-				render.c
+				render.c	\
+				colors.c	\
+				win_ctrl.c	\
+				err_ret.c
 
 OBJ			:=	$(SRC:%.c=%.o)
 
 all:		$(NAME)
-				@./$(NAME)
 
 $(NAME):	$(OBJ) | libft
 				@$(CC) $(CFLAGS) $^ $(LINKS) -o $@

@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   err_ret.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/23 00:58:28 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/04/19 19:08:03 by pnoronha         ###   ########.fr       */
+/*   Created: 2022/04/13 18:39:41 by pnoronha          #+#    #+#             */
+/*   Updated: 2022/04/19 16:52:27 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	create_trgb(int t, int r, int g, int b)
+int	print_input(void)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
+	ft_printf("Error: Wrong program usage. \nTry something like:\n \
+		- ./fractol mandelbrot\n \
+		- ./fractol julia\n");
+	exit(EXIT_FAILURE);
 }
 
-int	get_a(int trgb)
+void	check_input(char *argv)
 {
-	return ((trgb >> 24) & 0xFF);
-}
-
-int	get_r(int trgb)
-{
-	return ((trgb >> 16) & 0xFF);
-}
-
-int	get_g(int trgb)
-{
-	return ((trgb >> 8) & 0xFF);
-}
-
-int	get_b(int trgb)
-{
-	return (trgb & 0xFF);
+	if (ft_strncmp(argv, "mandelbrot", 10) == 0)
+		base()->fractol_type = mandelbrot;
+	// else if (ft_strncmp(argv, "julia", 5) == 0)
+		// base()->fractol_type = julia;
+	else
+		print_input();
 }
 
