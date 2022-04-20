@@ -6,7 +6,7 @@
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 23:16:19 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/04/20 00:04:37 by pnoronha         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:37:42 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ void	gen_pixel(void)
 	while (++y < base()->mlxv.height)
 	{
 		x = -1;
-		while (++x < base()->mlxv.width){
+		while (++x < base()->mlxv.width)
+		{
+			pixel_to_complex(x, y, &base()->view);
 			my_pixel_put(&base()->img, x, y,
-				base()->fractol_type(pixel_to_complex(x, y, &base()->view)));
+				base()->fractol_type(base()->cplx));
 		}
 	}
 }

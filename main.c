@@ -6,7 +6,7 @@
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 20:57:57 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/04/20 00:04:58 by pnoronha         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:32:21 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		print_input();
-	check_input(argv[1]);
+	check_input(++argv);
 	core = base();
 	init_mlx_core(core);
 	reset_viewer(&core->view);

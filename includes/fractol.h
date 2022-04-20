@@ -6,7 +6,7 @@
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 21:01:04 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/04/20 00:04:48 by pnoronha         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:36:02 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,12 @@ typedef struct s_complex
 {
 	double	real;
 	double	imag;
-	double	oldIm;
-	double	oldRe;
-	double	newIm;
-	double	newRe;
+	double	old_im;
+	double	old_re;
+	double	new_im;
+	double	new_re;
+	double	real_calc;
+	double	imag_calc;
 }	t_complex;
 
 typedef struct s_view
@@ -98,6 +100,7 @@ typedef struct s_structs
 	t_mlx		mlxv;
 	t_colors	colors;
 	t_view		view;
+	t_complex	cplx;
 	int	(*fractol_type)(t_complex z);
 }	t_structs;
 
@@ -107,14 +110,15 @@ int		print_pixel(t_structs *b);
 int		render_color(int px, int py, t_structs *vars);
 int		create_trgb(int a, int r, int g, int b);
 int		close_win(t_structs *b);
+double	map(double in, double inMin, double inMax, double outMin, double outMax);
 int		keys_control(int keycode, t_structs *b);
 void	init_win_ctrl(void);
-t_complex	pixel_to_complex(int px, int py, t_view *vi);
+void	pixel_to_complex(int px, int py, t_view *vi);
 int		mandelbrot(t_complex z);
 int		julia(t_complex z);
 
 int		print_input(void);
-void	check_input(char *argv);
+void	check_input(char **argv);
 void	reset_viewer(t_view *view);
 
 

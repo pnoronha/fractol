@@ -6,7 +6,7 @@
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 21:00:38 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/04/20 00:02:04 by pnoronha         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:05:47 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	move_screen(int keycode, t_view *view);
 static void	zoom_screen(int keycode, t_view *view);
 static void	fract_iters(int keycode, t_view *view);
+static void	julia_shape(int keycode, t_complex *cplx);
 
 int	keys_control(int keycode, t_structs *vars)
 {
@@ -28,6 +29,9 @@ int	keys_control(int keycode, t_structs *vars)
 		fract_iters(keycode, &vars->view);
 	else if (keycode == 82)
 		reset_viewer(&vars->view);
+	else if (base()->fractol_type == julia && (keycode == 91 ||
+		keycode == 84 || keycode == 86 || keycode == 88))
+		julia_shape(keycode, &vars->cplx);
 	gen_pixel();
 	return (0);
 }
@@ -61,4 +65,10 @@ static void	fract_iters(int keycode, t_view *view)
 	if (view->maxiter == 1 && keycode == 121)
 		return ;
 	view->maxiter += 1 * ((keycode == 116) - (keycode == 121));
+}
+
+static void	julia_shape(int keycode, t_complex *cplx)
+{
+	cplx->real += 0.0255 * ((keycode == 91) - (keycode == 84));
+	cplx->imag += 0.0255 * ((keycode == 88) - (keycode == 86));
 }

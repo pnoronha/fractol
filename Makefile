@@ -6,7 +6,7 @@
 #    By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 21:12:28 by pnoronha          #+#    #+#              #
-#    Updated: 2022/04/14 20:49:44 by pnoronha         ###   ########.fr        #
+#    Updated: 2022/04/20 16:01:15 by pnoronha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,14 @@ LINKS		=	-lmlx -lm -Llibft -lft -framework OpenGL -framework AppKit
 INC			=	-Iincludes -Ilibft/includes -Imac
 RM			=	rm -f
 
-SRC			=	main.c		\
-				pixel.c		\
-				render.c	\
-				colors.c	\
-				win_ctrl.c	\
-				err_ret.c
+SRC			=	main.c			\
+				pixel.c			\
+				render.c		\
+				colors.c		\
+				win_ctrl.c		\
+				err_ret.c		\
+				mandelbrot.c	\
+				julia.c
 
 OBJ			:=	$(SRC:%.c=%.o)
 
