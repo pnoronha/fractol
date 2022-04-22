@@ -6,7 +6,7 @@
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 20:57:57 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/04/20 16:32:21 by pnoronha         ###   ########.fr       */
+/*   Updated: 2022/04/22 12:55:26 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ void	init_mlx_core(t_structs	*core)
 
 void	loop(t_structs *core)
 {
-	mlx_loop_hook(core->mlxv.mlx, print_pixel, core);
-	mlx_hook(core->mlxv.win, ON_KEYDOWN, 1L<<0, keys_control, core);
+	mlx_loop_hook(core->mlxv.mlx, print_pixel, &core->img);
+	mlx_mouse_hook(core->mlxv.win, mouse_ctrl, &core->img);
+	mlx_hook(core->mlxv.win, ON_KEYDOWN, 1L<<0, keys_control, &core->img);
 	mlx_loop(core->mlxv.mlx);
 }
 
@@ -43,12 +44,11 @@ int	main(int argc, char **argv)
 {
 	t_structs	*core;
 
-	if (argc < 2)
-		print_input();
-	check_input(++argv);
+	check_input(++argv, argc);
+	// set_fractal(argv, argc);
 	core = base();
 	init_mlx_core(core);
-	reset_viewer(&core->view);
+	reset_view(&core->view);
 	gen_pixel();
 	loop(core);
 }

@@ -6,7 +6,7 @@
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:50:36 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/04/20 16:42:48 by pnoronha         ###   ########.fr       */
+/*   Updated: 2022/04/22 13:15:01 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,15 @@ int	mandelbrot(t_complex z)
 	else
 	{
 		color = (unsigned int)map(count, 0,
-			(base()->view.maxiter - 1), 0, 255);
-		base()->colors.blue = (color) * (1 - (color > 150));
-		return (create_trgb(0, color, 0, base()->colors.blue));
+			(base()->view.maxiter - 1), 15, 255);
+		base()->colors.blue = (color);
+		return (create_trgb(0, color, 0 , base()->colors.blue));
 	}
 }
 
+/*
+		color = (unsigned int)map(count, 0,
+			(base()->view.maxiter - 1), 0, 255);
+		base()->colors.blue = (color) * (1 - (color > 150));
+		return (create_trgb(0, color, 0, base()->colors.blue));
+*/

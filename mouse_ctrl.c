@@ -1,40 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   mouse_ctrl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/23 00:58:28 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/04/21 15:44:35 by pnoronha         ###   ########.fr       */
+/*   Created: 2022/04/21 17:15:03 by pnoronha          #+#    #+#             */
+/*   Updated: 2022/04/22 12:52:50 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	set_pixel_color(int color);
-int	create_trgb(int t, int r, int g, int b)
+static void	zoom_mouse(int keycode, t_view *view);
+
+int	mouse_ctrl(int keycode, t_structs *vars)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
+	(void)vars;
+	if (keycode == 5 || keycode == 4)
+		zoom_mouse(keycode, &vars->view);
+	printf("keycode >> %d\n", keycode);
+	return (0);
 }
 
-int	get_a(int trgb)
+void	zoom_mouse(int keycode, t_view *view)
 {
-	return ((trgb >> 24) & 0xFF);
+	view->zoom += (1) * ((keycode == 5) - (keycode == 4));
 }
-
-int	get_r(int trgb)
-{
-	return ((trgb >> 16) & 0xFF);
-}
-
-int	get_g(int trgb)
-{
-	return ((trgb >> 8) & 0xFF);
-}
-
-int	get_b(int trgb)
-{
-	return (trgb & 0xFF);
-}
-

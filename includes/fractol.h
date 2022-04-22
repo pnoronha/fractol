@@ -6,7 +6,7 @@
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 21:01:04 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/04/20 16:36:02 by pnoronha         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:18:06 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,13 @@ void	init_win_ctrl(void);
 void	pixel_to_complex(int px, int py, t_view *vi);
 int		mandelbrot(t_complex z);
 int		julia(t_complex z);
-
 int		print_input(void);
-void	check_input(char **argv);
-void	reset_viewer(t_view *view);
-
+void	check_input(char **argv, int argc);
+void	reset_view(t_view *view);
+void	move_screen(int keycode, t_view *view);
+void	zoom_screen(int keycode, t_view *view);
+void	fract_iters(int keycode, t_view *view);
+void	julia_shape(int keycode, t_complex *cplx);
+int		mouse_ctrl(int keycode, t_structs *vars);
 
 #endif
