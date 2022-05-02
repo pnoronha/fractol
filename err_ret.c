@@ -6,7 +6,7 @@
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 18:39:41 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/04/21 16:05:43 by pnoronha         ###   ########.fr       */
+/*   Updated: 2022/05/02 20:08:55 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	print_input(void)
 {
 	ft_printf("Error: Wrong program usage. \n\n\
-	Try something like:\n \
-		- ./fractol mandelbrot\n \
-		- ./fractol julia\n");
+	Try something like:\n\
+		-> ./fractol mandelbrot\n\
+		-> ./fractol julia (number) (number)\n");
 	exit(EXIT_FAILURE);
 }
 
@@ -25,9 +25,9 @@ void	check_input(char **argv, int argc)
 {
 	if (argc < 2)
 		print_input();
-	if (ft_strncmp(*argv, "mandelbrot", 10) == 0)
+	if (ft_strncmp(*argv, "mandelbrot\0", 11) == 0)
 		base()->fractol_type = mandelbrot;
-	else if (ft_strncmp(*argv, "julia", 5) == 0)
+	else if (ft_strncmp(*argv, "julia\0", 6) == 0)
 	{
 		base()->fractol_type = julia;
 		if (argc == 4)
@@ -41,4 +41,3 @@ void	check_input(char **argv, int argc)
 	else
 		print_input();
 }
-

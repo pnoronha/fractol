@@ -6,7 +6,7 @@
 #    By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 21:12:28 by pnoronha          #+#    #+#              #
-#    Updated: 2022/04/20 16:01:15 by pnoronha         ###   ########.fr        #
+#    Updated: 2022/05/02 21:54:26 by pnoronha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ INC			=	-Iincludes -Ilibft/includes -Imac
 RM			=	rm -f
 
 SRC			=	main.c			\
-				pixel.c			\
 				render.c		\
-				colors.c		\
-				win_ctrl.c		\
+				utils.c		\
+				keys_ctrl.c		\
+				mouse_ctrl.c	\
 				err_ret.c		\
 				mandelbrot.c	\
 				julia.c
