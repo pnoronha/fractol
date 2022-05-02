@@ -6,7 +6,7 @@
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:40:46 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/05/02 21:59:40 by pnoronha         ###   ########.fr       */
+/*   Updated: 2022/05/02 23:20:02 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	julia(t_complex *z)
 	else
 	{
 		color = (unsigned int)map(count, \
-			(base()->view.maxiter - 1), 50, 255);
-		base()->colors.red = color;
-		return (create_trgb(0, base()->colors.red / 2, 0, color));
+			(base()->view.maxiter - 1), 0, 255);
+		base()->colors.blue = (color) * (1 - (color > 150));
+		return (create_trgb(0, 0, color, base()->colors.blue));
 	}
 }

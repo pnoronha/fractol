@@ -6,7 +6,7 @@
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 21:00:38 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/05/02 22:07:50 by pnoronha         ###   ########.fr       */
+/*   Updated: 2022/05/02 22:29:39 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void	fract_iters(int key, t_view *view);
 
 int	keys_control(int key, t_structs *vars)
 {
-	ft_printf("%d\n", key);
 	if (key == ESC)
 		close_win(vars);
 	else if (key >= ARROW_LEFT && key <= ARROW_UP)
