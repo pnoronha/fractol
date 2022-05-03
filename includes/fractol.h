@@ -6,7 +6,7 @@
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 21:01:04 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/05/02 22:07:36 by pnoronha         ###   ########.fr       */
+/*   Updated: 2022/05/03 17:42:55 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,8 @@ void		gen_pixel(void);
 int			print_pixel(t_structs *b);
 int			render_color(int px, int py, t_structs *vars);
 int			create_trgb(int a, int r, int g, int b);
+int			iter_to_color(int iterations);
 int			close_win(t_structs *b);
-double		map(double in, double inMax, double outMin, double outMax);
 int			keys_control(int key, t_structs *b);
 void		init_win_ctrl(void);
 void		pixel_to_complex(int px, int py, t_view *vi);
