@@ -6,16 +6,16 @@
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 21:00:38 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/05/19 13:07:38 by pnoronha         ###   ########.fr       */
+/*   Updated: 2022/05/19 13:16:08 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	julia_shape(int key, t_complex *cplx);
-void	move_screen(int key, t_view *view);
-void	zoom_screen(int key, t_view *view);
-void	fract_iters(int key, t_view *view);
+static void	julia_shape(int key, t_complex *cplx);
+static void	move_screen(int key, t_view *view);
+static void	zoom_screen(int key, t_view *view);
+static void	fract_iters(int key, t_view *view);
 
 int	keys_control(int key, t_structs *vars)
 {
@@ -31,7 +31,7 @@ int	keys_control(int key, t_structs *vars)
 	return (0);
 }
 
-void	move_screen(int key, t_view *view)
+static void	move_screen(int key, t_view *view)
 {
 	view->movex += (1 / (view->zoom * 20)) * \
 		((key == ARROW_RIGHT) - (key == ARROW_LEFT));
@@ -39,7 +39,7 @@ void	move_screen(int key, t_view *view)
 		((key == ARROW_DOWN) - (key == ARROW_UP));
 }
 
-void	zoom_screen(int key, t_view *view)
+static void	zoom_screen(int key, t_view *view)
 {
 	if (key == PLUS)
 		view->zoom *= 1.1;
@@ -47,7 +47,7 @@ void	zoom_screen(int key, t_view *view)
 		view->zoom *= (1 / 1.1);
 }
 
-void	fract_iters(int key, t_view *view)
+static void	fract_iters(int key, t_view *view)
 {
 	if (view->maxiter == 1 && key == PAGE_DOWN)
 		return ;
@@ -57,7 +57,7 @@ void	fract_iters(int key, t_view *view)
 	view->maxiter += 10 * ((key == HOME) - (key == END));
 }
 
-void	julia_shape(int key, t_complex *cplx)
+static void	julia_shape(int key, t_complex *cplx)
 {
 	cplx->real += (1 / (base()->view.zoom * 50)) * \
 		((key == NUM_UP) - (key == NUM_DOWN));

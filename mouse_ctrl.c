@@ -6,7 +6,7 @@
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 17:15:03 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/05/02 22:58:51 by pnoronha         ###   ########.fr       */
+/*   Updated: 2022/05/19 13:15:27 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ static void	mouse_zoom(int key, t_view *view);
 
 int	mouse_ctrl(int key)
 {
-	if (key == 5 || key == 4)
-		mouse_zoom(key, &base()->view);
+	mouse_zoom(key, &base()->view);
 	gen_pixel();
 	return (0);
 }
