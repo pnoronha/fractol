@@ -6,33 +6,27 @@
 /*   By: pnoronha <pnoronha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 21:00:38 by pnoronha          #+#    #+#             */
-/*   Updated: 2022/05/02 22:29:39 by pnoronha         ###   ########.fr       */
+/*   Updated: 2022/05/19 13:07:38 by pnoronha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	julia_shape(int key, t_complex *cplx);
-static void	move_screen(int key, t_view *view);
-static void	zoom_screen(int key, t_view *view);
-static void	fract_iters(int key, t_view *view);
+void	julia_shape(int key, t_complex *cplx);
+void	move_screen(int key, t_view *view);
+void	zoom_screen(int key, t_view *view);
+void	fract_iters(int key, t_view *view);
 
 int	keys_control(int key, t_structs *vars)
 {
 	if (key == ESC)
 		close_win(vars);
-	else if (key >= ARROW_LEFT && key <= ARROW_UP)
-		move_screen(key, &vars->view);
-	else if (key == PLUS || key == MINUS)
-		zoom_screen(key, &vars->view);
-	else if (key == PAGE_UP || key == PAGE_DOWN \
-		|| key == HOME || key == END)
-		fract_iters(key, &vars->view);
-	else if (base()->fractol_type == julia && (key == NUM_UP \
-		|| key == NUM_DOWN || key == NUM_LEFT || key == NUM_RIGHT))
-		julia_shape(key, &vars->cplx);
-	else if (key == ZERO)
+	if (key == ZERO)
 		reset_view(&vars->view);
+	move_screen(key, &vars->view);
+	zoom_screen(key, &vars->view);
+	fract_iters(key, &vars->view);
+	julia_shape(key, &vars->cplx);
 	gen_pixel();
 	return (0);
 }
